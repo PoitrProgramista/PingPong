@@ -1,12 +1,14 @@
 object mainWindow: TmainWindow
-  Left = 329
-  Top = 70
+  Left = 246
+  Top = 104
+  Align = alClient
   BorderStyle = bsSingle
   Caption = 'Ping Pong'
   ClientHeight = 807
   ClientWidth = 1518
   Color = clBtnFace
   UseDockManager = True
+  DefaultMonitor = dmMainForm
   DockSite = True
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -14,6 +16,7 @@ object mainWindow: TmainWindow
   Font.Name = 'MS Sans Serif'
   Font.Style = []
   OldCreateOrder = False
+  Position = poDesktopCenter
   OnCreate = FormCreate
   PixelsPerInch = 96
   TextHeight = 13
@@ -26,8 +29,8 @@ object mainWindow: TmainWindow
     Brush.Color = clMedGray
   end
   object information: TLabel
-    Left = 120
-    Top = 152
+    Left = 320
+    Top = 176
     Width = 1201
     Height = 37
     Alignment = taCenter
@@ -75,15 +78,24 @@ object mainWindow: TmainWindow
   end
   object player1: TShape
     Left = 56
-    Top = 240
+    Top = 368
     Width = 32
     Height = 256
     Brush.Color = clHighlight
     Pen.Width = 3
   end
+  object ball: TShape
+    Left = 160
+    Top = 472
+    Width = 49
+    Height = 49
+    Brush.Color = clMaroon
+    Pen.Width = 3
+    Shape = stEllipse
+  end
   object startGame: TButton
-    Left = 544
-    Top = 592
+    Left = 736
+    Top = 464
     Width = 361
     Height = 113
     Cursor = crHandPoint
@@ -98,8 +110,8 @@ object mainWindow: TmainWindow
     OnClick = startGameClick
   end
   object nextRound: TButton
-    Left = 544
-    Top = 456
+    Left = 736
+    Top = 320
     Width = 361
     Height = 113
     Cursor = crHandPoint
@@ -113,16 +125,10 @@ object mainWindow: TmainWindow
     TabOrder = 1
     Visible = False
   end
-  object player1Vertical: TTimer
-    Interval = 10
-    OnTimer = player1VerticalTimer
+  object player1Movement: TTimer
+    Interval = 1
+    OnTimer = player1MovementTimer
     Left = 48
-    Top = 48
-  end
-  object player1Horizontal: TTimer
-    Interval = 10
-    OnTimer = player1HorizontalTimer
-    Left = 80
     Top = 48
   end
 end

@@ -19,12 +19,11 @@ __published:	// IDE-managed Components
         TLabel *score;
         TLabel *numberOfHits;
         TShape *player1;
-        TTimer *player1Vertical;
-        TTimer *player1Horizontal;
-        void __fastcall player1VerticalTimer(TObject *Sender);
+        TTimer *player1Movement;
+        TShape *ball;
+        void __fastcall player1MovementTimer(TObject *Sender);
         void __fastcall FormCreate(TObject *Sender);
         void __fastcall startGameClick(TObject *Sender);
-        void __fastcall player1HorizontalTimer(TObject *Sender);
 private:	// User declarations
 public:		// User declarations
         __fastcall TmainWindow(TComponent* Owner);

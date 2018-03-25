@@ -11,15 +11,25 @@ TmainWindow *mainWindow;
 
 TPoint previousCursorPosition;
 
-int calculatePlayerVelocity()
+int calculateHorizontalPlayerVelocity()
 {
-        int velocity;
+        int horizontalVelocity;
 
        TPoint cursorPosition = Mouse->CursorPos;
-       velocity = cursorPosition.y - previousCursorPosition.y;
-       previousCursorPosition = cursorPosition;
+       horizontalVelocity = cursorPosition.x - previousCursorPosition.x;
 
-       return velocity;
+       return horizontalVelocity;
+
+ }
+
+ int calculateVerticalPlayerVelocity()
+{
+        int verticalVelocity;
+
+       TPoint cursorPosition = Mouse->CursorPos;
+       verticalVelocity = cursorPosition.y - previousCursorPosition.y;
+
+       return verticalVelocity;
 
  }
 
@@ -30,57 +40,43 @@ __fastcall TmainWindow::TmainWindow(TComponent* Owner)
 }
 //---------------------------------------------------------------------------
 
-void __fastcall TmainWindow::player1VerticalTimer(TObject *Sender)
+void __fastcall TmainWindow::player1MovementTimer(TObject *Sender)
 {
 
-        int playerVerticalPosition = player1->Top + player1->Height/2;
-        TPoint mousePosition = mainWindow->ScreenToClient(Mouse->CursorPos);
-        if(playerVerticalPosition != mousePosition.y)
-        {
-                if(playerVerticalPosition > mousePosition.y  && player1->Top >= background->Top + 5)
-                {
-                    player1->Top -= abs(playerVerticalPosition-mousePosition.y)/10;
-                }
-                else if(playerVerticalPosition < mousePosition.y  && player1->Top + player1->Height <= background->Top + background->Height - 5)
-                {
-                     player1->Top += abs(playerVerticalPosition-mousePosition.y)/10;
-                }
-        }
-}
-//---------------------------------------------------------------------------
+        int verticalVelocity = calculateVerticalPlayerVelocity();
+        if(verticalVelocity < 0 && player1->Top >= background->Top + 5 || verticalVelocity > 0  && player1->Top + player1->Height <= background->Top + background->Height - 5)
+               player1->Top += verticalVelocity/6;
 
-void __fastcall TmainWindow::FormCreate(TObject *Sender)
-{
-        player1Vertical->Enabled=false;
-}
-//---------------------------------------------------------------------------
+        int horizontalVelocity = calculateHorizontalPlayerVelocity();
+        if(horizontalVelocity > 0 && player1->Left <= background->Left+250 || horizontalVelocity < 0 && player1->Left >= background->Left+50)
+                player1->Left += horizontalVelocity/8;
 
-void __fastcall TmainWindow::startGameClick(TObject *Sender)
-{
-        player1Vertical->Enabled =true;
-        startGame->Visible =false;
-        mainWindow->Cursor = crNone;
+        Mouse->CursorPos = ClientToScreen(TPoint(background->Left+background->Width/2 ,background->Top + background->Height/2));
         previousCursorPosition = Mouse->CursorPos;
 
 }
 //---------------------------------------------------------------------------
 
-void __fastcall TmainWindow::player1HorizontalTimer(TObject *Sender)
+void __fastcall TmainWindow::FormCreate(TObject *Sender)
 {
-      int playerHorizontalPosition = player1->Left + player1->Width/2;
-        TPoint mousePosition = mainWindow->ScreenToClient(Mouse->CursorPos);
-        if(playerHorizontalPosition != mousePosition.x)
-        {
-                if(playerHorizontalPosition > mousePosition.x  && player1->Left >= background->Left + 56)
-                {
-                    player1->Left -= abs(playerHorizontalPosition-mousePosition.x)/10;
-                }
-                else if(playerHorizontalPosition < mousePosition.x  && player1->Left + player1->Width <= background->Left + 100)
-                {
-                     player1->Left += abs(playerHorizontalPosition-mousePosition.x)/10;
-                }
-        }
+        player1Movement->Enabled=false;
+        player1->Visible = false;
+        ball->Visible = false;
 }
 //---------------------------------------------------------------------------
+
+void __fastcall TmainWindow::startGameClick(TObject *Sender)
+{
+        startGame->Visible =false;
+        information->Visible = false;
+        mainWindow->Cursor = crNone;
+        player1->Visible = true;
+        ball->Visible = true;
+        previousCursorPosition = Mouse->CursorPos;
+        player1Movement->Enabled =true;
+}
+
+//---------------------------------------------------------------------------
+
 
 
