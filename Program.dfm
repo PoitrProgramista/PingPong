@@ -1,11 +1,11 @@
 object mainWindow: TmainWindow
-  Left = 246
-  Top = 104
+  Left = 389
+  Top = 332
   Align = alClient
   BorderStyle = bsSingle
   Caption = 'Ping Pong'
   ClientHeight = 807
-  ClientWidth = 1518
+  ClientWidth = 1845
   Color = clBtnFace
   UseDockManager = True
   DefaultMonitor = dmMainForm
@@ -23,7 +23,7 @@ object mainWindow: TmainWindow
   object background: TShape
     Left = 0
     Top = 0
-    Width = 1518
+    Width = 1845
     Height = 807
     Align = alClient
     Brush.Color = clMedGray
@@ -77,21 +77,29 @@ object mainWindow: TmainWindow
     Visible = False
   end
   object player1: TShape
-    Left = 56
+    Left = 24
     Top = 368
-    Width = 32
+    Width = 64
     Height = 256
     Brush.Color = clHighlight
     Pen.Width = 3
   end
   object ball: TShape
-    Left = 160
+    Left = 320
     Top = 472
     Width = 49
     Height = 49
     Brush.Color = clMaroon
     Pen.Width = 3
     Shape = stEllipse
+  end
+  object player2: TShape
+    Left = 1832
+    Top = 368
+    Width = 64
+    Height = 256
+    Brush.Color = clHighlight
+    Pen.Width = 3
   end
   object startGame: TButton
     Left = 736
@@ -129,6 +137,18 @@ object mainWindow: TmainWindow
     Interval = 1
     OnTimer = player1MovementTimer
     Left = 48
+    Top = 48
+  end
+  object ballMovement: TTimer
+    Interval = 1
+    OnTimer = ballMovementTimer
+    Left = 96
+    Top = 48
+  end
+  object Player2Movement: TTimer
+    Interval = 1
+    OnTimer = Player2MovementTimer
+    Left = 144
     Top = 48
   end
 end

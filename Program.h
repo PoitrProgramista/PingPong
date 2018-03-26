@@ -21,9 +21,14 @@ __published:	// IDE-managed Components
         TShape *player1;
         TTimer *player1Movement;
         TShape *ball;
+        TTimer *ballMovement;
+        TShape *player2;
+        TTimer *Player2Movement;
         void __fastcall player1MovementTimer(TObject *Sender);
         void __fastcall FormCreate(TObject *Sender);
         void __fastcall startGameClick(TObject *Sender);
+        void __fastcall ballMovementTimer(TObject *Sender);
+        void __fastcall Player2MovementTimer(TObject *Sender);
 private:	// User declarations
 public:		// User declarations
         __fastcall TmainWindow(TComponent* Owner);
